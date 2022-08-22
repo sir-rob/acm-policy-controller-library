@@ -1,0 +1,35 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequireCosNodeImage
+metadata:
+  name: pci-dss-v3.2.1-nodes-have-consistent-time
+  labels:
+    policycontroller.gke.io/bundleName: pci-dss-v3.2.1
+  annotations:
+    policycontroller.gke.io/constraintData: |
+      "{
+        bundleName: 'pci-dss-v3.2.1',
+        bundleDisplayName: 'PCI DSS v3.2.1',
+        bundleLink: 'https://github.com/GoogleCloudPlatform/acm-policy-controller-library/tree/master/bundles/pci-dss-v3.2.1 ',
+        bundleVersion: '202208.0',
+        bundleDescription: 'Use the PCI-DSS v3.2.1 policy bundle with Anthos Policy Controller to evaluate the compliance of your in cluster resources against the Payment Card Industry Data Security Standard.',
+        controlNumbers: '[10.4.1,10.4.3]',
+        severity: 'UNASSIGNED',
+        description: 'Ensures consistent and correct time on Nodes by ensuring the usage of COS as the OS image.',
+        remediation: 'The use of a OS images other than COS is resticted, please use COS as the OS image.  See "Node Images" for more information: https://cloud.google.com/kubernetes-engine/docs/concepts/node-images',
+        minimumTemplateLibraryVersion: '1.12.1'
+      }"
+spec:
+  enforcementAction: dryrun

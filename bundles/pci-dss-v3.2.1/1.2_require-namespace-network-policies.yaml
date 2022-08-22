@@ -1,0 +1,48 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequireNamespaceNetworkPolicies
+metadata:
+  name: pci-dss-v3.2.1-require-namespace-network-policies
+  labels:
+    policycontroller.gke.io/bundleName: pci-dss-v3.2.1
+  annotations:
+    policycontroller.gke.io/constraintData: |
+      "{
+        bundleName: 'pci-dss-v3.2.1',
+        bundleDisplayName: 'PCI DSS v3.2.1',
+        bundleLink: 'https://github.com/GoogleCloudPlatform/acm-policy-controller-library/tree/master/bundles/pci-dss-v3.2.1 ',
+        bundleVersion: '202208.0',
+        bundleDescription: 'Use the PCI-DSS v3.2.1 policy bundle with Anthos Policy Controller to evaluate the compliance of your in cluster resources against the Payment Card Industry Data Security Standard.',
+        controlNumbers: '[1.2]',
+        severity: 'UNASSIGNED',
+        description: 'Requires that every namespace defined in the cluster has a NetworkPolicy.',
+        remediation: 'The use of a namespace in the cluster without a NetworkPolicy is resticted, please add a NetworkPolicy to your namespace.  See "Network Policies" for more information: https://kubernetes.io/docs/concepts/services-networking/network-policies/',
+        minimumTemplateLibraryVersion: '1.10.1'
+      }"
+spec:
+  enforcementAction: dryrun
+  match:
+    excludedNamespaces:
+      - kube-system
+      - kube-node-lease
+      - kube-public
+      - gatekeeper-system
+      - config-management-system
+      - config-management-monitoring
+      - resource-group-system
+      - gke-connect
+      - istio-system
+      - asm-system
+      - default

@@ -20,6 +20,7 @@ This repository contains **sample** Constraints which make use of Policy Control
 - [Policy Essentials v2022](./bundles/policy-essentials-v2022)
 - [CIS Kubernetes 1.5.1](./bundles/cis-k8s-v1.5.1)
 - [ASM Policy 0.0.1](./bundles/asm-policy-v0.0.1)
+- [PREVIEW - PCI DSS v3.2.1](./bundles/pci-dss-v3.2.1)
 
 ## Usage
 
